@@ -10,5 +10,27 @@
     justify-content: center;
     align-items: center;
 
-    background-color: red;
+    background-color: beige;
+}
+
+.buttonSubmit {
+
+    height: 3em;
+    width: 8em;
+
+    border-radius: 1em;
+    background-color: crimson;
+    color: white;
+    font-weight: bolder;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonSubmit:hover {
+
+    transition: 0.4s;
+    background-color: lightcoral;
+    cursor: pointer;
 }
