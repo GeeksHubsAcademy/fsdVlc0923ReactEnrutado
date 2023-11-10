@@ -13,6 +13,8 @@ export const Login = () => {
     password: "",
   });
 
+  const [msgError, setMsgError] = useState('');
+
   const functionHandler = (e) => {
     setCredenciales((prevState) => ({
       ...prevState,
@@ -38,7 +40,10 @@ export const Login = () => {
                 },500);
             }
         )
-        .catch(error => console.log(error));
+        .catch(error => {
+          console.log(error)
+          setMsgError(error.message);
+        });
 
   }
 
@@ -63,6 +68,7 @@ export const Login = () => {
         // onBlur={}
       />
       <div className='buttonSubmit' onClick={logMe}>Log Me!</div>
+      <div>{msgError}</div>
     </div>
   );
 };
