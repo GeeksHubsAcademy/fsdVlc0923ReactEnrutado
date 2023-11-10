@@ -3,8 +3,12 @@ import "./Register.css";
 
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { validator } from "../../services/useful";
+import { registerUser } from "../../services/apiCalls";
+import { useNavigate } from 'react-router-dom';
 
 export const Register = () => {
+
+  const navigate = useNavigate();
 
   const [user, setUser] = useState({
     name: '',
@@ -38,6 +42,34 @@ export const Register = () => {
         ...prevState,
         [e.target.name + 'Error']: error,
     }));
+  }
+
+  const Submit = () => {
+
+    for(let test1 in user){
+      if(user[test1] === ""){
+        return;
+      }
+
+    }
+
+    for(let test in userError){
+      if(userError[test] !== ""){
+        return;
+      }
+    }
+
+    registerUser(user)
+      .then(
+        resultado => {
+          //si todo ha ido bien, redirigiremos a login...
+
+          setTimeout(()=>{
+            navigate("/login");
+          },500)
+        }
+      )
+      .catch(error=> console.log(error));
   }
 
   return (
@@ -82,6 +114,7 @@ export const Register = () => {
         functionBlur={errorCheck}
       />
       <div className='errorMsg'>{userError.phoneError}</div>
+      <div className='buttonSubmit' onClick={Submit}>Submit</div>
     </div>
   );
 };
