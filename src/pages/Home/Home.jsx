@@ -23,9 +23,9 @@ export const Home = () => {
           <Row>
             {characters.map((character) => {
               return (
-                <Col sm={12} lg={6} xl={4} xxl={3} key={character.id}>
+                <Col sm={12} lg={6} xl={2} xxl={2} key={character.id}>
                   {/* {character.name} */}
-                  <img src={character.image} alt={character.name} />
+                  <img className='avatarCharacter' src={character.image} alt={character.name} />
                 </Col>
               );
             })}
