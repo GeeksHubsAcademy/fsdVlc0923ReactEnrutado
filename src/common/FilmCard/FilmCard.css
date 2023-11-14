@@ -1,0 +1,15 @@
+
+
+.filmCardDesign {
+    height: 13em;
+    width: 15em;
+
+    border-radius: 2em;
+    background-color: burlywood;
+
+    margin: 1em;
+}
+
+.avatarPic {
+    height: 10em;
+}
