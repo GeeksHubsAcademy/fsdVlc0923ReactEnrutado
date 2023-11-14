@@ -25,11 +25,16 @@ export const Films = () => {
         })
         .catch((error) => console.log(error));
     } else {
-      searchMovie(rdxSearch.criteria)
-        .then((results) => {
-          setFilms(results.data.results);
-        })
-        .catch((error) => console.log(error));
+      const bringDebounced = setTimeout(() => {
+        searchMovie(rdxSearch.criteria)
+          .then((results) => {
+            console.log(results.data.results)
+            setFilms(results.data.results);
+          })
+          .catch((error) => console.log(error));
+      }, 350);
+
+      return () => clearTimeout(bringDebounced);
     }
   }, [rdxSearch.criteria]);
 
