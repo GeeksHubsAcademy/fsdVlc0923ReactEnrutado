@@ -3,6 +3,7 @@ import "./Login.css";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { logUser } from "../../services/apiCalls";
 import { useNavigate } from 'react-router-dom';
+import { validator } from "../../services/useful";
 
 //Importo Rdx
 
@@ -62,20 +63,22 @@ export const Login = () => {
   return (
     <div className="loginDesign">
       <CustomInput
+        disabled={false}
         design={"inputDesign"}
         type={"email"}
         name={"email"}
         placeholder={""}
-        // value={}
+        value={""}
         functionProp={functionHandler}
         functionBlur={errorCheck}
       />
       <CustomInput
+        disabled={false}
         design={"inputDesign"}
         type={"password"}
         name={"password"}
         placeholder={""}
-        // value={}
+        value={""}
         functionProp={functionHandler}
         functionBlur={errorCheck}
       />

@@ -15,6 +15,9 @@ export const validator = (type, value) => {
         
         case 'name':
         case 'surname':
+        case 'firstName':
+        case 'lastName':
+        case 'gender':
 
             if(value.length > 25){
                 return "Escribe un nombre correcto"
