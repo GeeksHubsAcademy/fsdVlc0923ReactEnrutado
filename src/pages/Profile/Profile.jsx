@@ -3,13 +3,17 @@ import "./Profile.css";
 
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { validator } from "../../services/useful";
-
+import { useNavigate } from 'react-router-dom';
 
 //Importo elementos para conexión a RDX en modo lectura
 import { useSelector } from "react-redux";
 import { userData } from "../userSlice";
 
 export const Profile = () => {
+
+  //Instancio navigate para poder navegar
+  const navigate = useNavigate();
+
   //Instancio a RDX en modo lectura
   const datosRdxUser = useSelector(userData);
 
@@ -33,7 +37,9 @@ export const Profile = () => {
   useEffect(() => {
     //RDX se puede seguir como un hook de useState... por lo tanto seguimos
 
-    console.log(datosRdxUser);
+    if(!datosRdxUser.credentials.token){
+      navigate("/")
+    }
   }, [datosRdxUser]);
 
   const errorCheck = (e) => {

@@ -8,13 +8,14 @@ import { jwtDecode } from "jwt-decode";
 
 //Importo Rdx
 
-import { useDispatch } from "react-redux";  //useDispatch es necesario para emitir acciones
-import { login } from "../userSlice";
+import { useSelector, useDispatch } from "react-redux";  //useDispatch es necesario para emitir acciones
+import { login, userData } from "../userSlice";
 
 export const Login = () => {
 
   const navigate = useNavigate();
 
+  const rdxUserData = useSelector(userData);
   const dispatch = useDispatch();
 
   const [credenciales, setCredenciales] = useState({
@@ -23,6 +24,12 @@ export const Login = () => {
   });
 
   const [msgError, setMsgError] = useState('');
+
+  useEffect(()=>{
+    if(rdxUserData.credentials.token){
+      navigate("/")
+    }
+  },[rdxUserData])
 
   const functionHandler = (e) => {
     setCredenciales((prevState) => ({
@@ -34,10 +41,6 @@ export const Login = () => {
   const errorCheck = () => {
     console.log("ha ha ha ha");
   }
-
-//   useEffect(()=>{
-//     console.log(credenciales);
-//   },[credenciales]);
 
   const logMe = () => {
 
