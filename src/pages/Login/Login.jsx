@@ -4,6 +4,7 @@ import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { logUser } from "../../services/apiCalls";
 import { useNavigate } from 'react-router-dom';
 import { validator } from "../../services/useful";
+import { jwtDecode } from "jwt-decode";
 
 //Importo Rdx
 
@@ -43,7 +44,9 @@ export const Login = () => {
     logUser(credenciales)
         .then(
             resultado => {
-                console.log(resultado)
+
+                let decodificado = jwtDecode(resultado.data.token);
+                console.log("soy el token decodificado....", decodificado);
                 //Aqui guardaría el token........en RDXXX
                 dispatch(login({ credentials: resultado.data }))
 

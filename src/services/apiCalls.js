@@ -35,4 +35,3 @@ export const latestMovie = async () => {
 
     return await axios.get(`${ROOT_API_TMDB}trending/movie/day?language=en-US&page=1&api_key=${API_KEY_TMDB}`)
 }
-

@@ -12,6 +12,7 @@ export const Films = () => {
   const rdxSearch = useSelector(searchData);
 
   const [films, setFilms] = useState([]);
+  const [msgError, setMsgError] = useState('');
 
   // useEffect(()=>{
   //     console.log(`Estamos en films y la búsqueda de Header en redux ahora vale... ${rdxSearch.criteria}`)
@@ -28,8 +29,11 @@ export const Films = () => {
       const bringDebounced = setTimeout(() => {
         searchMovie(rdxSearch.criteria)
           .then((results) => {
-            console.log(results.data.results)
-            setFilms(results.data.results);
+            if(results.data.results.length !== 0 || setMsgError !== ""){
+              setFilms(results.data.results);
+            } else {
+              setMsgError("No se han recuperado películas")
+            }
           })
           .catch((error) => console.log(error));
       }, 350);
