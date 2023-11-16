@@ -3,18 +3,21 @@ import "./Register.css";
 
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { validator } from "../../services/useful";
-import { registerUser } from "../../services/apiCalls";
+import { bringCharacters, registerUser } from "../../services/apiCalls";
 import { useNavigate } from 'react-router-dom';
 
 export const Register = () => {
 
   const navigate = useNavigate();
 
+  const [artists, setArtists] = useState([]);
+
   const [user, setUser] = useState({
     name: '',
     email: '',
     password: '',
-    phone: ''
+    phone: '',
+    artist: ''
   })
 
   const [userError, setUserError] = useState({
@@ -24,6 +27,23 @@ export const Register = () => {
     phoneError: ''
   })
 
+  useEffect(()=>{
+    
+    if(artists.length === 0){
+      
+      bringCharacters()
+        .then(
+          results => {
+            setArtists(results.data.results)
+          }
+        )
+        .catch(error => console.log(error))
+    } else {
+
+      console.log("artists vale...", artists)
+
+    }
+  }, [artists]);
 
   const functionHandler = (e) => {
     setUser((prevState) => ({
@@ -117,6 +137,23 @@ export const Register = () => {
         functionProp={functionHandler}
         functionBlur={errorCheck}
       />
+
+      {
+        artists.length > 0 &&
+
+        <select name="artist" onChange={functionHandler}>
+          <option>Select an artist</option>
+          {
+            artists.map(
+              artist => {
+                return (
+                  <option key={artist.id}>{artist.name}</option>
+                )
+              }
+            )
+          }
+        </select>
+      }
       <div className='errorMsg'>{userError.phoneError}</div>
       <div className='buttonSubmit' onClick={Submit}>Submit</div>
     </div>
