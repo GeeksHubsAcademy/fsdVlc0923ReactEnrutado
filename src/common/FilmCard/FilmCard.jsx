@@ -1,5 +1,5 @@
 
-import "./FilmCard.css";
+import "./FilmCard.sass";
 
 export const FilmCard = ({title, original_title, overview, poster_path}) => {
 
